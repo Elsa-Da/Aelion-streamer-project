@@ -1,1 +1,97 @@
 /* You can add global styles to this file, and also import other style files */
+
+/**
+* Helpers
+**/
+$cols: 12;
+
+@mixin col-basis($basis) {
+  flex : $basis / $cols;
+}
+
+@mixin col-x-list($col-name) {
+  @for $i from 1 through $cols {
+      &.#{$col-name}#{$i} {
+        @include col-basis($i);
+      }
+  }
+}
+/**
+* Flex grid system
+**/
+.container {
+  width: 100%;
+}
+
+@media screen and (min-width: 36em) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 48em) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 62em) {
+  .container {
+    width: 62em;
+    margin: 0 auto;
+
+    &.fluid {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 75em) {
+  .container {
+    width: 75em;
+    margin: 0 auto;
+    &.fluid {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+
+  .col {
+    flex-basis: 100%;
+    margin-right: .5em;
+    margin-left: .5em;
+
+    &.xs-hidden {
+      display: none;
+    }
+    @include col-x-list("xs");
+
+    &.sm-hidden {
+      display: none;
+    }
+    @include col-x-list("sm");
+
+    &.md-hidden {
+      display: none;
+    }
+    @include col-x-list("md");
+
+    &.lg-hidden {
+      display: none;
+    }
+    @include col-x-list("lg");
+
+    &.xl-hidden {
+      display: none;
+    }
+    @include col-x-list("xl");
+  }
+}

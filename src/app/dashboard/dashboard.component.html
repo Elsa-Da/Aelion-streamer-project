@@ -1,0 +1,19 @@
+<p>dashboard works!</p>
+<div class="row">
+  <span (click)="isAdmin = !isAdmin">{{isAdmin ? "Admin" : "Student"}}</span>
+</div>
+
+<div class="row">
+    <ng-container *ngFor="let tile of tiles">
+      <app-tile></app-tile>
+    <!-- <div class="col xs12 tile" *ngIf="isAdmin || tile.title !== 'Parameters'">
+        <div class="tile-title">{{tile.title}}</div>
+        <blockquote>{{tile.summary}}</blockquote>
+        <div class ="tile-actions">
+            <button type="button" (click)="onClick(tile)">Go!</button>
+        </div>
+    </div> -->
+
+</ng-container>
+</div>
+
