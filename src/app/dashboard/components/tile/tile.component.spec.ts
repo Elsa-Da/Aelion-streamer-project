@@ -16,6 +16,11 @@ describe('TileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TileComponent);
     component = fixture.componentInstance;
+    component.tileInfo = {
+      title: "Hello world",
+      summary: "test",
+      action: ['dashboard']
+    }
     fixture.detectChanges();
   });
 
