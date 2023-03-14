@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tile',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tile.component.scss']
 })
 export class TileComponent implements OnInit {
+  @Input() tileInfo: any;
 
   constructor() { }
 

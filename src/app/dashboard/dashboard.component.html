@@ -5,14 +5,7 @@
 
 <div class="row">
     <ng-container *ngFor="let tile of tiles">
-      <app-tile></app-tile>
-    <!-- <div class="col xs12 tile" *ngIf="isAdmin || tile.title !== 'Parameters'">
-        <div class="tile-title">{{tile.title}}</div>
-        <blockquote>{{tile.summary}}</blockquote>
-        <div class ="tile-actions">
-            <button type="button" (click)="onClick(tile)">Go!</button>
-        </div>
-    </div> -->
+      <app-tile *ngIf="isAdmin || tile.title !== 'Parameters'" class="col xs12 md4" [tileInfo]="tile"></app-tile>
 
 </ng-container>
 </div>

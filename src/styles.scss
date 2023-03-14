@@ -1,3 +1,4 @@
+// src/styles.scss
 /* You can add global styles to this file, and also import other style files */
 
 /**
@@ -6,7 +7,7 @@
 $cols: 12;
 
 @mixin col-basis($basis) {
-  flex : $basis / $cols;
+  grid-column: span $basis;
 }
 
 @mixin col-x-list($col-name) {
@@ -17,7 +18,7 @@ $cols: 12;
   }
 }
 /**
-* Flex grid system
+* Responsive Grid system
 **/
 .container {
   width: 100%;
@@ -59,20 +60,16 @@ $cols: 12;
 }
 
 .row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-bottom: 1em;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: .5em;
 
   .col {
-    flex-basis: 100%;
-    margin-right: .5em;
-    margin-left: .5em;
-
     &.xs-hidden {
       display: none;
     }
     @include col-x-list("xs");
+    /** .row .col.xs1 ... .row .col.xs12 **/
 
     &.sm-hidden {
       display: none;
