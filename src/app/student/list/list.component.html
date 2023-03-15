@@ -1,1 +1,33 @@
-<p>list works!</p>
+<a routerLink="/dashboard">Retour</a>
+<table>
+  <thead>
+    <tr>
+      <th>
+        <input type="checkbox" [(ngModel)]="checkUncheckAll" (ngModelChange)="onCheckUncheckAll()">
+      </th>
+      <th (click)="byId()" [ngClass]="{'sorted': sortDefault === 'id'}">
+        <span class="down-sort" *ngIf="sortDefault === 'id' && byIdSortOrder === 1">&gt;</span>
+        Id
+        <span class="up-sort" *ngIf="sortDefault === 'id' && byIdSortOrder === -1">&lt;</span>
+      </th>
+      <th (click)="byLastname()" [ngClass]="{'sorted': sortDefault === 'lastName'}">
+        <span class="down-sort" *ngIf="sortDefault === 'lastName' && byLastNameSortOrder === 1">&gt;</span>
+        Lastname
+        <span class="up-sort" *ngIf="sortDefault === 'lastName' && byLastNameSortOrder === -1">&gt;</span>
+      </th>
+      <th>Prénom</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of data">
+      <td>
+        <input type="checkbox" [(ngModel)]="student.isSelected!" (ngModelChange)="onSelectStudent(student)">
+      </td>
+      <td>{{student.id}}</td>
+      <td>{{student.lastName}}</td>
+      <td>{{student.firstName}}</td>
+      <td>{{student.email}}</td>
+    </tr>
+  </tbody>
+</table>
