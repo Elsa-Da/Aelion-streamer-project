@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ListComponent } from '../../list/list.component';
 
 @Component({
   selector: 'app-module-list',
@@ -11,5 +12,7 @@ export class ModuleListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @Input() module: any;
 
 }

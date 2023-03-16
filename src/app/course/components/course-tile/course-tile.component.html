@@ -1,1 +1,10 @@
-<p>course-tile works!</p>
+<div class="course_list"><span class="course_list-title">{{course.title}}</span>
+  <span>{{course.modules.length}} items</span>
+  <span id="arrow" (click)="onClick($event)">></span>
+</div>
+
+<div class="module_list" *ngIf="course.isSelected">
+  <div *ngFor="let module of course.modules">
+    <app-module-list [module]="module"></app-module-list>
+  </div>
+</div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ListComponent } from '../../list/list.component';
 
 @Component({
   selector: 'app-course-tile',
@@ -7,9 +8,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseTileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _listComponent: ListComponent) { }
 
   ngOnInit(): void {
   }
+
+  @Input() course: any;
+
+  public onClick(event: any): void {
+
+    if (this._listComponent.lastArrow) {
+      this._listComponent.lastArrow.setAttribute('class', 'arrow_up')
+    }
+    this._listComponent.lastArrow = event.target
+    this.course.isSelected = !this.course.isSelected
+
+    const courses = this._listComponent.courses
+    courses.forEach(e => {
+      if (e != this.course) {
+        e.isSelected = false;
+      }
+    })
+
+    if (this.course.isSelected == true) {
+      event.target.setAttribute('class', 'arrow_down')
+    } else {
+      event.target.setAttribute('class', 'arrow_up')
+    }
+    const allUpArrow: any = document.querySelectorAll("arrow_up")
+    console.log(allUpArrow);
+
+    console.log(allUpArrow)
+    allUpArrow.forEach((e: any) => {
+      console.log(e)
+      e.target.setAttribute('class', 'arrow_down')
+    })
+
+  }
+
 
 }

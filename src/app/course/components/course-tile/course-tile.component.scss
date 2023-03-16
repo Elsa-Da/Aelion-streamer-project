@@ -1,0 +1,58 @@
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(90deg)
+  }
+}
+
+@keyframes rotateBack {
+  0% {
+    transform: rotate(90deg)
+  }
+  60% {
+    transform: rotate(-20deg)
+  }
+  95%{
+    transform: rotate(12deg)
+  }
+  100%{
+    transform: rorate(0deg)
+  }
+}
+
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+span {
+  padding: 1em;
+
+}
+
+.course_list {
+  display: flex;
+&-title {
+  flex-grow: 2;
+}}
+
+.module_list {
+  padding:1em 1em 2em 1em;
+  animation: fadeIn 2s ease-out;
+}
+
+#arrow {
+  margin-right: 3em;
+}
+
+  .arrow_down {
+      animation: rotate 0.7s ease-out forwards;
+    }
+
+    .arrow_up {
+      animation: rotateBack 0.8s ease-out forwards;
+    }
