@@ -95,3 +95,6 @@ $cols: 12;
     @include col-x-list("xl");
   }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
