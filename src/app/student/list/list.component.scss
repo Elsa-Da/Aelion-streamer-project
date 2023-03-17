@@ -1,0 +1,57 @@
+// list.component.scss
+$line-color: rgba(0, 20, 200, 1);
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+  font-family: Roboto;
+  caption {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: left;
+  }
+  thead {
+    height: 3em;
+    border-bottom: solid 1px $line-color;
+
+    tr {
+      th {
+        text-align: left;
+        font-size: 1.2em;
+        font-weight: bold;
+        &.sorted {
+          color: $line-color;
+        }
+        span {
+          display: inline-block;
+          &.down-sort {
+            transform: rotate(90deg);
+          }
+
+          &.up-sort {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      height: 3em;
+      border-bottom: solid 1px $line-color;
+      &:nth-child(odd) {
+        background-color: lighten($line-color, 50%);
+      }
+    }
+  }
+}
+
+
+.bubble {
+  border-radius: 10em;
+  background-color: lighten($line-color, 55%);
+  padding: 0.7em;
+  font-size: 15px;
+
+}

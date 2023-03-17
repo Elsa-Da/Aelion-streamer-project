@@ -8,8 +8,7 @@
   </blockquote>
 
   <div class="actions">
-    <div *ngIf="tileInfo.title == 'Students'; else elseBlock" routerLink="/student/list" routerLinkActive="active"><button type="button">Go!</button></div>
-    <ng-template #elseBlock><button type="button">Go!</button></ng-template>
+    <button type="button" (click)="onClick(tileInfo)">Go!</button>
   </div>
 
 

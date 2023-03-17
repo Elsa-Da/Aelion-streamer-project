@@ -1,0 +1,13 @@
+<section>
+
+  <div class="course_list_header">
+    <span class="course_list_header-title">Course List</span>
+    <span> {{courses.length}} items</span>
+  </div>
+
+  <div *ngFor="let course of courses" class="lol">
+    <app-course-tile [course]="course"></app-course-tile>
+  </div>
+
+
+</section>

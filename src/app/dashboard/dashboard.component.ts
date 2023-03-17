@@ -21,12 +21,12 @@ export class DashboardComponent implements OnInit {
     {
       title: 'Students',
       summary: 'Add, remove, view student',
-      action: ['dashboard']
+      action: ['/', 'student', 'list']
     },
     {
       title: 'Courses',
       summary: 'Managa courses and medias',
-      action: ['dashboard']
+      action: ['/', 'course', 'list']
     })
   }
 
