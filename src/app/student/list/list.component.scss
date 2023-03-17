@@ -5,6 +5,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   border: none;
+  font-family: Roboto;
   caption {
     font-size: 2em;
     font-weight: bold;
@@ -46,4 +47,13 @@ table {
 
     }
   }
+}
+
+
+.bubble {
+  border-radius: 10em;
+  background-color: lighten($line-color, 55%);
+  padding: 0.7em;
+  font-size: 15px;
+
 }
