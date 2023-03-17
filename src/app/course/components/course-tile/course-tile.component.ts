@@ -35,14 +35,7 @@ export class CourseTileComponent implements OnInit {
     } else {
       event.target.setAttribute('class', 'arrow_up')
     }
-    const allUpArrow: any = document.querySelectorAll("arrow_up")
-    console.log(allUpArrow);
 
-    console.log(allUpArrow)
-    allUpArrow.forEach((e: any) => {
-      console.log(e)
-      e.target.setAttribute('class', 'arrow_down')
-    })
 
   }
 

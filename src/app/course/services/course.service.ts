@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 import { map, Observable, take } from 'rxjs';
-import { CourseType } from '../types/course-type';
 import { SelectCourseType } from '../types/select-course-type';
 
 @Injectable({
@@ -15,14 +14,14 @@ export class CourseService {
 
   public findAll(): Observable<SelectCourseType[]> {
     return this._httpClient.get<SelectCourseType[]>(this.endpoint)
-      .pipe(
-        take(1),
-        map((courses: SelectCourseType[]) => {
-          return courses.map((course: SelectCourseType) => {
-            return { ...course, isSelected: false }
-          })
-        })
-      )
+    // .pipe(
+    //   take(1),
+    //   map((courses: SelectCourseType[]) => {
+    //     return courses.map((course: SelectCourseType) => {
+    //       return { ...course, isSelected: false }
+    //     })
+    //   })
+    // )
   }
 
 
