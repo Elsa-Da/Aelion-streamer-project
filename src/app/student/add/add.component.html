@@ -47,7 +47,7 @@
         <legend>Student credentials</legend>
 
         <div class="row">
-          <div class="col xs12">
+          <div class="col xs12 md6">
             <mat-form-field>
               <input matInput placeholder="Student login ..." formControlName="login">
               <mat-error *ngIf="c['login'].errors && c['login'].touched">
@@ -60,10 +60,8 @@
               </mat-error>
             </mat-form-field>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col xs12">
+          <div class="col xs12 md6">
             <mat-form-field>
               <input matInput type="password" placeholder="Student password ..." formControlName="password">
               <mat-error *ngIf="c['password'].errors && c['password'].touched">
