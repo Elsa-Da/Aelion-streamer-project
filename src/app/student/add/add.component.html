@@ -1,1 +1,89 @@
-<p>add works!</p>
+<div class="row">
+  <div class="col xs12">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <legend>Student infos</legend>
+        <div class="row">
+          <div class="col xs12 md6">
+            <mat-form-field>
+              <input matInput placeholder="Student last name ..." formControlName="lastName">
+              <mat-error *ngIf="c['lastName'].errors && c['lastName'].touched">
+                Last name is required !
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col xs12 md6">
+            <mat-form-field>
+              <input matInput placeholder="Student first name ..." formControlName="firstName">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col xs12 md6">
+            <mat-form-field>
+              <input matInput placeholder="Student email ..." formControlName="email">
+              <mat-error *ngIf="c['email'].errors && c['email'].touched">
+                <span *ngIf="c['email'].hasError('required')">
+                  Email is required
+                </span>
+                <span *ngIf="c['email'].hasError('pattern')">
+                  Email doesn't match email pattern
+                </span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col xs12 md6">
+            <mat-form-field>
+              <input matInput placeholder="Student phone number ..." formControlName="phoneNumber">
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Student credentials</legend>
+
+        <div class="row">
+          <div class="col xs12">
+            <mat-form-field>
+              <input matInput placeholder="Student login ..." formControlName="login">
+              <mat-error *ngIf="c['login'].errors && c['login'].touched">
+                <span *ngIf="c['login'].hasError('required')">
+                  Login is required !
+                </span>
+                <span *ngIf="c['login'].hasError('minlength')">
+                  Login must be at least 8 characters
+                </span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col xs12">
+            <mat-form-field>
+              <input matInput type="password" placeholder="Student password ..." formControlName="password">
+              <mat-error *ngIf="c['password'].errors && c['password'].touched">
+                <span *ngIf="c['password'].hasError('required')">
+                  Password is required !
+                </span>
+                <span *ngIf="c['password'].hasError('minlength')">
+                  Password must be at least 8 characters
+                </span>
+                <span *ngIf="c['email'].hasError('pattern')">
+                  Email must have at least 1 lowercase, 1 uppercase and 1 special character
+                </span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <button mat-raised-button color="primary" [disabled]="form.invalid">Add</button>
+    </form>
+    {{form.value | json}}
+  </div>
+</div>
