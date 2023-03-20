@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddComponent } from './student/add/add.component';
 import { ListComponent } from './student/list/list.component';
 
 @NgModule({
@@ -23,13 +24,18 @@ export class AppRoutingModule {
       component: ListComponent
     },
     {
+      path: 'student/add',
+      component: AddComponent
+    },
+    {
       path: 'course',
       loadChildren: () => import('./course/course.module')
-      .then((m) => m.CourseModule)},
+        .then((m) => m.CourseModule)
+    },
     {
       path: '**',
       redirectTo: 'dashboard', // Or any 404 component you want !
       pathMatch: 'full'
     }
   ]
- }
+}
