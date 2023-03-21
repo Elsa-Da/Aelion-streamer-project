@@ -26,7 +26,8 @@
         <input type="checkbox" [(ngModel)]="student.isSelected!" (ngModelChange)="onSelectStudent(student)">
       </td>
       <td>{{student.id}}</td>
-      <td><span class="bubble">{{student | initials }}</span></td>
+      <td> <a [routerLink]="['/','student', student.id, 'update']"><span class="bubble">{{student | initials
+            }}</span></a></td>
       <td>{{student.lastName | uppercase}}</td>
       <td>{{student.firstName}}</td>
       <td>{{student.email}}</td>
