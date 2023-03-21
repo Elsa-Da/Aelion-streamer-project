@@ -57,9 +57,6 @@ export class StudentService {
   }
 
   public add(student: IStudent): void {
-
-
-
     this._httpClient.post<IStudent>(this.endpoint, student)
       .pipe(take(1))
       .subscribe({
