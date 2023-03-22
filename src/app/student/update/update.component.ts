@@ -1,8 +1,9 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { StudentModel } from '../models/student-model';
+import { StudentFormService } from '../services/student-form.service';
 import { StudentService } from './../services/student.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class UpdateComponent implements OnInit {
   public form: FormGroup = new FormGroup({})
   public student: StudentModel | null = null
 
-  constructor(private _route: ActivatedRoute, private _service: StudentService, private _formBuilder: FormBuilder) { }
+  constructor(private _route: ActivatedRoute, private _service: StudentService, private _formService: StudentFormService) { }
 
   ngOnInit(): void {
     console.log(this._route.snapshot.paramMap.get('id'))
@@ -24,7 +25,8 @@ export class UpdateComponent implements OnInit {
       .subscribe({
         next: (student: StudentModel) => {
           this.student = student
-          this._buildForm()
+          this._formService.buildForm(this.student)
+          this.form = this._formService.form
         },
         error: (error: any) => {
           console.log("Smthg went wrong")
@@ -32,7 +34,7 @@ export class UpdateComponent implements OnInit {
       })
   }
   get c(): { [key: string]: AbstractControl } {
-    return this.form.controls
+    return this._formService.c
   }
 
   onSubmit(): void {
@@ -52,41 +54,6 @@ export class UpdateComponent implements OnInit {
           console.log(JSON.stringify(error))
         }
       })
-  }
-
-  private _buildForm(): void {
-    this.form = this._formBuilder.group({
-      lastName: [
-        this.student!.lastName, // Default value
-        [Validators.required] // Validators function
-      ],
-      firstName: [
-        this.student!.firstName,
-        []
-      ],
-      email: [
-        this.student!.email,
-        [
-          Validators.required,
-          Validators.pattern(/[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
-        ]
-      ],
-      phoneNumber: [
-        this.student!.phoneNumber,
-        []
-      ],
-      login: [
-        this.student!.login, // Default value
-        [Validators.required,
-        Validators.minLength(8)] // Validators function
-      ],
-      password: [
-        this.student!.password, // Default value
-        [Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)] // Validators function
-      ]
-    })
   }
 
 }
