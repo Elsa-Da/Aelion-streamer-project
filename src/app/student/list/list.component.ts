@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { ISimpleStudent } from '../interfaces/i-simpleStudent';
-import { IStudent } from '../interfaces/i-student';
 import { StudentService } from '../services/student.service';
+import { StudentFormComponent } from '../dialogs/student-form/student-form.component';
+import { StudentModel } from '../models/student-model';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +13,7 @@ import { StudentService } from '../services/student.service';
 })
 export class ListComponent implements OnInit {
 
-  constructor(private _studentService: StudentService) { }
+  constructor(private _studentService: StudentService, private _matDialog: MatDialog) { }
   data: ISimpleStudent[] = [];
   public byIdSortOrder: number = -1
   public byLastNameSortOrder: number = 1
@@ -27,6 +29,23 @@ export class ListComponent implements OnInit {
         this.data.sort((s1: ISimpleStudent, s2: ISimpleStudent) => s1.id! - s2.id!)
       })
 
+  }
+
+  public openForm(student: ISimpleStudent | null = null): void {
+    const dialogRef = this._matDialog.open(StudentFormComponent, {
+      width: '500px',
+      height: '700px',
+      hasBackdrop: false,
+      data: { student: new StudentModel() }
+    })
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        console.log('got result')
+      } else {
+        console.log('no result')
+      }
+    })
   }
 
   public byId(): void {
