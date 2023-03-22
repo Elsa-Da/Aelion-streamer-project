@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import { ISimpleStudent } from '../interfaces/i-simpleStudent';
+import { IStudent } from '../interfaces/i-student';
 import { StudentService } from '../services/student.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { StudentService } from '../services/student.service';
 export class ListComponent implements OnInit {
 
   constructor(private _studentService: StudentService) { }
-  data: ISimpleStudent[]=[];
+  data: ISimpleStudent[] = [];
   public byIdSortOrder: number = -1
   public byLastNameSortOrder: number = 1
   public sortDefault: string = 'id'
@@ -20,9 +21,11 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this._studentService.findSimpleStudentDtos()
-    .pipe(take(1))
-    .subscribe((student: ISimpleStudent[]) =>
-      { this.data = student })
+      .pipe(take(1))
+      .subscribe((student: ISimpleStudent[]) => {
+        this.data = student
+        this.data.sort((s1: ISimpleStudent, s2: ISimpleStudent) => s1.id! - s2.id!)
+      })
 
   }
 
@@ -39,12 +42,12 @@ export class ListComponent implements OnInit {
   }
 
   public onSelectStudent(student: ISimpleStudent): void {
-   this.checkUncheckAll = this.data.filter((s: ISimpleStudent) => s.isSelected).length === this.data.length
+    this.checkUncheckAll = this.data.filter((s: ISimpleStudent) => s.isSelected).length === this.data.length
   }
 
   public onCheckUncheckAll(): void {
     this.data = this.data.map((s) => {
-      return {...s, isSelected: this.checkUncheckAll}
+      return { ...s, isSelected: this.checkUncheckAll }
     })
   }
 }

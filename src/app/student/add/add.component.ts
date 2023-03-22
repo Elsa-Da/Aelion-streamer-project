@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StudentModel } from '../models/student-model';
 import { StudentService } from '../services/student.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { StudentService } from '../services/student.service';
 export class AddComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({})
+  public student: StudentModel = new StudentModel()
 
   constructor(private _formBuilder: FormBuilder, private _studentService: StudentService) { }
 
