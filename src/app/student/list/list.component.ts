@@ -28,24 +28,17 @@ export class ListComponent implements OnInit {
         this.data = student
         this.data.sort((s1: ISimpleStudent, s2: ISimpleStudent) => s1.id! - s2.id!)
       })
-
   }
 
   public openForm(student: ISimpleStudent | null = null): void {
-    const dialogRef = this._matDialog.open(StudentFormComponent, {
-      width: '500px',
-      height: '700px',
-      hasBackdrop: false,
-      data: { student: new StudentModel() }
-    })
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        console.log('got result')
-      } else {
-        console.log('no result')
-      }
-    })
+    if (!student) {
+      this._openDialog(new StudentModel())
+    } else {
+      this._studentService.findOne(student.id!)
+        .subscribe((completeStudent: StudentModel) => {
+          this._openDialog(completeStudent)
+        })
+    }
   }
 
   public byId(): void {
@@ -67,6 +60,23 @@ export class ListComponent implements OnInit {
   public onCheckUncheckAll(): void {
     this.data = this.data.map((s) => {
       return { ...s, isSelected: this.checkUncheckAll }
+    })
+  }
+
+  private _openDialog(student: StudentModel): void {
+    const dialogRef = this._matDialog.open(StudentFormComponent, {
+      width: '500px',
+      height: '700px',
+      hasBackdrop: false,
+      data: { student }
+    })
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        console.log('got result')
+      } else {
+        console.log('no result')
+      }
     })
   }
 }
