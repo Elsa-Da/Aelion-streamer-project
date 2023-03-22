@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { map, Observable, take } from 'rxjs';
+import { map, Observable, take, tap } from 'rxjs';
 import { ISimpleStudent } from '../interfaces/i-simpleStudent';
 import { IStudent } from '../interfaces/i-student';
 import { StudentModel } from '../models/student-model';
@@ -21,7 +21,15 @@ export class StudentService {
     return this._httpClient.get<IStudent[]>(this.endpoint)
   }
 
-  public findOne(id: number): void {
+  public findOne(id: number): Observable<StudentModel> {
+    return this._httpClient.get<StudentModel>(this.endpoint + '/' + id)
+      .pipe(
+        tap((response: any) => {
+          console.log(JSON.stringify(response))
+        }),
+        take(1),
+        map((student: any) => student)
+      )
 
   }
 
@@ -77,8 +85,8 @@ export class StudentService {
   }
 
 
-  public update(student: StudentModel): void {
-
+  public update(student: StudentModel): Observable<HttpResponse<any>> {
+    return this._httpClient.put<StudentModel>(this.endpoint, student, { observe: 'response' })
   }
 
   public remove(student: StudentModel): void {

@@ -1,6 +1,10 @@
 // list.component.scss
 $line-color: rgba(0, 20, 200, 1);
 
+a {
+  text-decoration: none;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -38,7 +42,7 @@ table {
   }
   tbody {
     tr {
-      height: 3em;
+      height: 3.4em;
       border-bottom: solid 1px $line-color;
       &:nth-child(odd) {
         background-color: lighten($line-color, 50%);
@@ -53,5 +57,6 @@ table {
   background-color: lighten($line-color, 55%);
   padding: 0.7em;
   font-size: 15px;
+
 
 }

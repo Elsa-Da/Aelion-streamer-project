@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddComponent } from './student/add/add.component';
 import { ListComponent } from './student/list/list.component';
+import { UpdateComponent } from './student/update/update.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -26,6 +27,10 @@ export class AppRoutingModule {
     {
       path: 'student/add',
       component: AddComponent
+    },
+    {
+      path: 'student/:id/update',
+      component: UpdateComponent
     },
     {
       path: 'course',
