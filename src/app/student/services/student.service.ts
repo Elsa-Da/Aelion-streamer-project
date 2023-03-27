@@ -84,13 +84,25 @@ export class StudentService {
 
   }
 
+  public fromModaleAdd(student: IStudent): Observable<any> {
+    return this._httpClient.post<IStudent>(this.endpoint, student)
+      .pipe(take(1))
+  }
+
 
   public update(student: StudentModel): Observable<HttpResponse<any>> {
     return this._httpClient.put<StudentModel>(this.endpoint, student, { observe: 'response' })
   }
 
-  public remove(student: StudentModel): void {
-
+  public delete(id: number): Observable<StudentModel> {
+    return this._httpClient.delete<StudentModel>(this.endpoint + '/' + id)
+      .pipe(
+        tap((response: any) => {
+          console.log(`service delete ${JSON.stringify(response)}`)
+        }),
+        take(1),
+        map((student: any) => student)
+      )
   }
 
 }

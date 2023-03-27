@@ -63,6 +63,14 @@ export class ListComponent implements OnInit {
     })
   }
 
+  public deleteStudent(student: ISimpleStudent): void {
+    this._studentService.delete(student.id!)
+      .subscribe(() => {
+        console.log("deleted!")
+      })
+  }
+
+
   private _openDialog(student: StudentModel): void {
     const dialogRef = this._matDialog.open(StudentFormComponent, {
       width: '500px',
@@ -73,7 +81,27 @@ export class ListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        console.log('got result')
+        // Convert StudentModel to SimpleStudent (or IStudent)
+        const simpleStudent: ISimpleStudent = {
+          id: result.id,
+          lastName: result.lastName,
+          firstName: result.firstName,
+          email: result.email,
+          isSelected: false
+        }
+        // if student already exists in students : replace it
+        const index: number = this.data.findIndex((student: ISimpleStudent) => student.id === simpleStudent.id)
+        if (index > -1) {
+          this.data.splice(
+            index,
+            1,
+            simpleStudent
+          )
+        } else {
+          this.data.push(simpleStudent)
+        }
+        // else add it (and re sort table)
+        this.data.sort((s1: ISimpleStudent, s2: ISimpleStudent) => s1.id! - s2.id!)
       } else {
         console.log('no result')
       }

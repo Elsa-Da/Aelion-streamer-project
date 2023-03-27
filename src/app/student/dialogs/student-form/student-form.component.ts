@@ -38,7 +38,10 @@ export class StudentFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.dialogRef.close(this._student)
+    this._studentFormService.onSubmit()
+      .subscribe((student: StudentModel) => {
+        this.dialogRef.close(student)
+      })
   }
 
 }

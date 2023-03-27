@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { map, Observable } from 'rxjs';
+import { IStudent } from '../interfaces/i-student';
 import { StudentModel } from '../models/student-model';
+import { StudentService } from './student.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,7 @@ export class StudentFormService {
   private _form: FormGroup = new FormGroup({})
   private _student: StudentModel = new StudentModel()
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private _studentService: StudentService) {
     this._buildForm()
   }
 
@@ -27,6 +30,32 @@ export class StudentFormService {
    */
   get form(): FormGroup {
     return this._form
+  }
+
+  public onSubmit(): Observable<any> {
+
+    if (this._student.id) {
+      this._student.lastName = this.c['lastName'].value
+      this._student.firstName = this.c['firstName'].value
+      this._student.email = this.c['email'].value
+      this._student.phoneNumber = this.c['phoneNumber'].value
+      this._student.login = this.c['login'].value
+      this._student.password = this.c['password'].value
+      return this._studentService.update(this._student)
+        .pipe(map(_ => this._student) // Qd update dans studentservice, on récupère une réponse mais pas un student, le pipe fait bien l'update et ne retourne que le student pas le resultat du update.
+        )
+    }
+
+    const student: IStudent = {
+      lastName: this.c['lastName'].value,
+      firstName: this.c['firstName'].value,
+      email: this.c['email'].value,
+      phoneNumber: this.c['phoneNumber'].value,
+      login: this.c['login'].value,
+      password: this.c['password'].value,
+      isSelected: false
+    }
+    return this._studentService.fromModaleAdd(student)
   }
 
   private _buildForm(): void {

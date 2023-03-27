@@ -27,13 +27,13 @@
         <input type="checkbox" [(ngModel)]="student.isSelected!" (ngModelChange)="onSelectStudent(student)">
       </td>
       <td>{{student.id}}</td>
-      <td>
-        <div (click)="openForm(student)"><span class="bubble">{{student | initials
-            }}</span></div>
+      <td><span class="bubble" (click)="openForm(student)">{{student | initials
+          }}</span>
       </td>
       <td>{{student.lastName | uppercase}}</td>
       <td>{{student.firstName}}</td>
       <td>{{student.email}}</td>
+      <td><span (click)="deleteStudent(student)">delete</span></td>
     </tr>
   </tbody>
 </table>
