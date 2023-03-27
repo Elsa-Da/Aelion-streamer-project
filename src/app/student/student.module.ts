@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { InitialsPipe } from './pipes/initials.pipe';
 import { AddComponent } from './add/add.component';
 import { UpdateComponent } from './update/update.component';
+import { StudentFormComponent } from './dialogs/student-form/student-form.component';
 
 
 
@@ -15,7 +16,8 @@ import { UpdateComponent } from './update/update.component';
     ListComponent,
     InitialsPipe,
     AddComponent,
-    UpdateComponent
+    UpdateComponent,
+    StudentFormComponent
   ],
   imports: [
     SharedModule,
